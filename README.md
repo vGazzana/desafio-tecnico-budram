@@ -4,58 +4,66 @@
 
 Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
-- Docker
-- Docker Compose
-- Node.js
-- NPM
+-   Docker
+-   Docker Compose
+-   Node.js
+-   NPM
+
+### Configuração Inicial do Projeto
+
+1. Clone o repositório:
+    ```sh
+    git clone git@github.com:vGazzana/desafio-tecnico-brudam.git
+    cd desafio-tecnico-brudam
+    ```
+2. Copie o arquivo de configuração `.env.example` e renomeie para `.env`
+    ```sh
+    cp .env.example .env
+    ```
 
 ### Iniciando o Projeto
 
-Para iniciar o projeto utilizando Docker, siga os passos abaixo:
+Para iniciar o projeto utilizando Docker, siga os passos abaixo no diretório raiz do projeto `desafio-tecnico-brudam`:
 
-1. Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
-2. No diretório raiz do projeto, execute o comando abaixo para construir e iniciar os containers:
+1. Instale as dependências do Composer dentro do container:
+    ```sh
+    docker-compose run --rm app composer install
+    ```
+2. Gere a chave da aplicação Laravel:
+    ```sh
+    docker-compose run --rm app php artisan key:generate
+    ```
+3. Suba os containers:
     ```sh
     docker-compose up --build
     ```
-
-### Rodando as Migrations
-
-Para rodar as migrations dentro do container Docker, siga os passos abaixo:
-
-1. Acesse o container da aplicação:
+4. Execute as migrations para criar as tabelas:
     ```sh
-    docker-compose exec app bash
+    docker-compose exec app php artisan migrate
     ```
-2. Dentro do container, execute o comando abaixo para rodar as migrations:
+5. Popule o banco de dados com os seeders:
     ```sh
-    php artisan migrate
+    docker-compose exec app php artisan db:seed
     ```
-
-### Rodando os Seeders
-
-Para rodar os seeders dentro do container Docker, siga os passos abaixo:
-
-1. Acesse o container da aplicação (caso ainda não tenha feito):
-    ```sh
-    docker-compose exec app bash
-    ```
-2. Dentro do container, execute o comando abaixo para rodar os seeders:
-    ```sh
-    php artisan db:seed
-    ```
-
-### Instalando Dependências do NPM e Build do TailwindCSS
-
-Para garantir que você tenha acesso ao CSS do TailwindCSS, siga os passos abaixo:
-
-1. No diretório raiz do projeto, execute o comando abaixo para instalar as dependências do NPM:
+6. Instale as dependências do NPM:
     ```sh
     npm install
     ```
-2. Após a instalação das dependências, execute o comando abaixo para construir os arquivos CSS:
+7. Compile os arquivos CSS utilizando o comando:
     ```sh
     npm run build
     ```
+8. Agora você está pronto para utilizar o projeto!
 
-Agora você está pronto para utilizar o projeto!
+### Resumo dos Comandos Principais
+
+| Descricao                      | Comando                                                              |
+| ------------------------------ | -------------------------------------------------------------------- |
+| Instalar dependências Composer | docker-compose run --rm app composer install                         |
+| Gerar chave da aplicação       | docker-compose run --rm app php artisan key:generate                 |
+| Subir os containers            | docker-compose up --build -d                                         |
+| Rodar as migrations            | docker-compose exec app php artisan migrate                          |
+| Rodar os seeders               | docker-compose exec app php artisan db:seed                          |
+| Instalar dependências NPM      | npm install                                                          |
+| Compilar TailwindCSS           | npm run build                                                        |
+| Iniciar o servidor Laravel     | docker-compose exec app php artisan serve --host=0.0.0.0 --port=8000 |
