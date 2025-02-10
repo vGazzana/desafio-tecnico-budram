@@ -1,4 +1,4 @@
-## Desafio Tecnico Brudam
+## Desafio Tecnico Laravel
 
 ### Pré-requisitos
 
@@ -13,8 +13,8 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
 1. Clone o repositório:
     ```sh
-    git clone git@github.com:vGazzana/desafio-tecnico-brudam.git
-    cd desafio-tecnico-brudam
+    git clone git@github.com:vGazzana/desafio-tecnico-laravel.git
+    cd desafio-tecnico-laravel
     ```
 2. Copie o arquivo de configuração `.env.example` e renomeie para `.env`
     ```sh
@@ -23,7 +23,7 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
 ### Iniciando o Projeto
 
-Para iniciar o projeto utilizando Docker, siga os passos abaixo no diretório raiz do projeto `desafio-tecnico-brudam`:
+Para iniciar o projeto utilizando Docker, siga os passos abaixo no diretório raiz do projeto `desafio-tecnico-laravel`:
 
 1. Instale as dependências do Composer dentro do container:
     ```sh
